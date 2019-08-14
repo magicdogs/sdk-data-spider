@@ -1,0 +1,5 @@
+cx-Oracle==7.2.1
+pyquery==1.4.0
+requests==2.22.0
+schedule==0.6.0
+

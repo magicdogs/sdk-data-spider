@@ -1,0 +1,71 @@
+for result in cursor.execute("select count(1) from GRAB_THIRD_WEBSITE c where c.id = " + "1003"):
+    print(result)
+r2 = Lu714()
+r2.start()
+print(r2.data)
+
+connection = cx_Oracle.connect("sdk_user", "sdk_user", "14.154.29.170:8002/sdk:SDK_USER", encoding='utf-8')
+cursor = connection.cursor()
+sql = "select count(1) from GRAB_THIRD_WEBSITE c where c.id = :id"
+cursor.prepare(sql)
+cursor.execute(None, {'id': 1003})
+for a,b,c,d in cursor:
+    print(a, b, c, d)
+connection.close()
+
+schedule.every(10).minutes.do(job)
+# schedule.every(1).seconds.do(job)
+# schedule.every().day.at("10:30").do(job)
+
+
+install on windows
+
+PATH=$PATH:D:\instantclient_19_3
+
+python3
+must be copy those three dll to python SitesPackage/
+	oci.dll
+	oraocci19d.dll
+	oraociei19.dll
+
+
+install on linux kernel
+
+sudo apt install libaio1
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/oracle_client/instantclient_19_3
+
+
+# dt = {
+#     "type_name": "8.10更新",
+#     "app_name": "敬业花"
+# }
+# if check_db_item_exists(dt):
+#     print("exists item.")
+# time.sleep(12)
+
+
+
+
+connection = pool.acquire()
+cursor = connection.cursor()
+
+
+result = cursor.execute("select web.id,web.url from grab_third_website_extend web "
+               "inner join hei_appsum0813_1 hei "
+               "on web.app_name = hei.appname "
+               "and web.app_type = hei.app_type")
+
+table_records = result.fetchall()
+pool.release(connection)
+
+for i in table_records:
+    try:
+        code = HttpHelper.http_simple_get(i[1]).status_code
+        if code == 200:
+            print(i[0])
+    except Exception as e:
+        pass
+
+
+
